@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYRANIX Gaming Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyranix: {
+                            50: '#f0f4ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            accent: '#ff0055',
+                            neon: '#00f3ff',
+                            gold: '#ffb703',
+                            card: '#121826',
+                            dark: '#0a0d14'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Chakra Petch', 'sans-serif'],
+                        arcade: ['"Press Start 2P"', 'cursive'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,700;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #07090e;
+            color: #f1f5f9;
+        }
+
+        .font-cyber {
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        .font-pixel {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* Retro Arcade & Neon Glow Effects */
+        .retro-text-glow {
+            text-shadow: 3px 3px 0px #ff0055, -2px -2px 0px #00f3ff, 0 0 12px rgba(0,243,255,0.6);
+        }
+
+        .pixel-border {
+            box-shadow: 0 0 0 4px #121826, 0 0 0 6px #00f3ff, 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+
+        .neon-text-cyan {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6), 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .neon-text-red {
+            text-shadow: 0 0 10px rgba(255, 0, 85, 0.7), 0 0 25px rgba(255, 0, 85, 0.4);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px -10px rgba(0, 243, 255, 0.25);
+            border-color: rgba(0, 243, 255, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0d14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+
+        /* CUSTOM RETRO CYRANIX CURSOR STYLES */
+        html, body, a, button, input, select, label, [role="button"] {
+            cursor: none !important;
+        }
+
+        #cyranixCursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 999999;
+            will-change: transform;
+            transform: translate3d(-100px, -100px, 0);
+            transition: opacity 0.2s ease;
+        }
+
+        #cyranixCursorTrail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 999998;
+            will-change: transform;
+            transform: translate3d(-100px, -100px, 0);
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1.5px solid rgba(0, 243, 255, 0.6);
+            background-color: rgba(0, 243, 255, 0.08);
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+            transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+
+        .cursor-hover-active #cyranixCursor svg {
+            transform: rotate(45deg) scale(1.15);
+            filter: drop-shadow(0 0 10px #ff0055);
+        }
+
+        .cursor-hover-active #cyranixCursorTrail {
+            width: 42px !important;
+            height: 42px !important;
+            border-color: #ff0055 !important;
+            background-color: rgba(255, 0, 85, 0.15) !important;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6) !important;
+        }
+
+        .click-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999999;
+            width: 6px;
+            height: 6px;
+            border-radius: 1px;
+            animation: particle-pop 0.4s ease-out forwards;
+        }
+
+        @keyframes particle-pop {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-cyranix-neon selection:text-black">
+
+    <!-- CUSTOM RETRO CYRANIX CURSOR -->
+    <div id="cyranixCursor" class="opacity-0">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="transition-transform duration-150 ease-out">
+            <path d="M6 10V6h4M22 6h4v4M26 22v4h-4M10 26H6v-4" stroke="#00f3ff" stroke-width="2" stroke-linecap="square"/>
+            <line x1="16" y1="4" x2="16" y2="10" stroke="#00f3ff" stroke-width="1.5"/>
+            <line x1="16" y1="22" x2="16" y2="28" stroke="#00f3ff" stroke-width="1.5"/>
+            <line x1="4" y1="16" x2="10" y2="16" stroke="#00f3ff" stroke-width="1.5"/>
+            <line x1="22" y1="16" x2="28" y2="16" stroke="#00f3ff" stroke-width="1.5"/>
+            <rect x="15" y="15" width="2" height="2" fill="#ff0055" class="drop-shadow-[0_0_6px_#ff0055]"/>
+        </svg>
+    </div>
+    <div id="cyranixCursorTrail" class="opacity-0"></div>
+
+    <!-- Retro Arcade Boot Loading Screen -->
+    <div id="loadingScreen" class="fixed inset-0 z-[100] bg-slate-950 flex flex-col items-center justify-center p-4 transition-opacity duration-500">
+        <div class="relative flex flex-col items-center gap-6">
+            <div class="w-16 h-16 rounded-2xl bg-slate-900 border-2 border-cyranix-neon flex items-center justify-center text-cyranix-neon text-2xl shadow-[0_0_25px_rgba(0,243,255,0.5)] animate-bounce">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <div class="text-center space-y-2">
+                <div class="inline-block px-3 py-1 rounded-full bg-cyranix-neon/10 border border-cyranix-neon/30 text-cyranix-neon font-pixel text-[8px] uppercase mb-1">
+                    CYRANIX v3.5 (2025–2026 EDITION)
+                </div>
+                <h2 class="text-xl sm:text-2xl font-pixel text-white retro-text-glow">CYRANIX</h2>
+                <div class="flex items-center gap-1.5 justify-center text-[10px] font-pixel text-cyranix-neon">
+                    <span class="animate-pulse">INITIALIZING 2026 BUILDS...</span>
+                    <span class="inline-block w-2 h-2 rounded-full bg-cyranix-neon animate-ping"></span>
+                </div>
+            </div>
+            <div class="w-48 h-2 bg-slate-900 border border-slate-800 rounded-full overflow-hidden relative">
+                <div id="loadingBar" class="h-full bg-gradient-to-r from-cyranix-accent to-cyranix-neon w-0 transition-all duration-300"></div>
+            </div>
+            <div id="loadingTip" class="text-[10px] font-pixel text-amber-400/90 max-w-xs text-center mt-2 px-2 animate-pulse leading-relaxed">
+                "Updated 2025-2026 WASM engine loaded. Maximum FPS enabled."
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3.5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="resetFilters()">
+                <div class="w-10 h-10 rounded-lg bg-slate-900 border-2 border-cyranix-neon flex items-center justify-center text-amber-400 text-lg shadow-[0_0_12px_rgba(0,243,255,0.4)] group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-gamepad animate-pulse text-cyranix-neon"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-pixel tracking-tight text-white retro-text-glow">
+                            CYRANIX
+                        </h1>
+                        <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[8px] font-pixel">
+                            2025-2026 LATEST
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden sm:flex flex-1 max-w-md relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                <input type="text" id="searchInput" oninput="filterGames()" placeholder="Search updated 2025-2026 games..." class="w-full bg-slate-900/90 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyranix-neon transition-all font-pixel text-[10px]">
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="openSettingsModal()" class="flex items-center gap-2 bg-slate-900 border border-slate-800 hover:border-cyranix-neon text-slate-300 hover:text-white px-3.5 py-2 rounded-xl transition-all shadow-md group" title="Settings & Stealth Cloaker">
+                    <i id="settingsCog" class="fa-solid fa-gear text-sm transition-transform duration-700 text-cyranix-neon"></i>
+                    <span class="hidden md:inline text-[10px] font-pixel text-cyranix-neon uppercase">Settings</span>
+                </button>
+                <button onclick="openAddGameModal()" class="flex items-center gap-2 bg-gradient-to-r from-cyranix-accent to-purple-600 hover:opacity-90 text-white font-pixel text-[10px] uppercase px-3.5 py-2 rounded-xl transition-all shadow-md shadow-cyranix-accent/20">
+                    <i class="fa-solid fa-plus text-xs"></i>
+                    <span>Add Game</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 space-y-6">
+
+        <!-- Games List Header & Filters -->
+        <section class="space-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+                <div>
+                    <h3 class="text-base sm:text-lg font-pixel text-white flex items-center gap-3">
+                        <span class="w-3 h-3 rounded-full bg-cyranix-neon inline-block animate-pulse"></span>
+                        CYRANIX CATALOG (2025–2026 VERIFIED)
+                    </h3>
+                    <p class="text-[10px] font-pixel text-slate-400 mt-2">100% High-FPS HTML5 & WASM Games (No Expired 2024 Sources)</p>
+                </div>
+
+                <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                    <button onclick="filterCategory('All')" class="filter-btn active px-3.5 py-2 rounded-lg text-[10px] font-pixel uppercase transition-all bg-cyranix-neon text-slate-950">
+                        ALL
+                    </button>
+                    <button onclick="filterCategory('Horror')" class="filter-btn px-3.5 py-2 rounded-lg text-[10px] font-pixel uppercase transition-all bg-slate-900 hover:bg-slate-800 text-slate-300">
+                        HORROR
+                    </button>
+                    <button onclick="filterCategory('Arcade')" class="filter-btn px-3.5 py-2 rounded-lg text-[10px] font-pixel uppercase transition-all bg-slate-900 hover:bg-slate-800 text-slate-300">
+                        ARCADE
+                    </button>
+                    <button onclick="filterCategory('3D Runner')" class="filter-btn px-3.5 py-2 rounded-lg text-[10px] font-pixel uppercase transition-all bg-slate-900 hover:bg-slate-800 text-slate-300">
+                        3D RUNNER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Games Grid -->
+            <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated via JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- GAME PLAYER MODAL -->
+    <div id="gameModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md hidden flex flex-col items-center justify-center p-2 sm:p-6">
+        <div id="modalInner" class="w-full max-w-5xl bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl flex flex-col h-[90vh]">
+            
+            <div class="bg-slate-950 px-5 py-3 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span id="modalCategory" class="px-2.5 py-1 rounded-md bg-cyranix-accent/20 text-cyranix-accent font-pixel text-[9px] uppercase border border-cyranix-accent/30">
+                        HORROR
+                    </span>
+                    <h3 id="modalTitle" class="text-xs sm:text-sm font-pixel text-white">Five Nights at Freddy's</h3>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleFullscreen()" class="p-2 text-slate-400 hover:text-cyranix-neon rounded-lg hover:bg-slate-800 transition-all flex items-center gap-1.5 text-[10px] font-pixel" title="Fullscreen">
+                        <i id="fullscreenIcon" class="fa-solid fa-expand text-sm"></i>
+                        <span class="hidden sm:inline">FULLSCREEN</span>
+                    </button>
+                    <button onclick="closeGameModal()" class="p-2 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-slate-800 transition-all" title="Close">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="iframeContainer" class="flex-1 bg-black relative overflow-hidden flex items-center justify-center">
+                <iframe id="gameIframe" src="" class="w-full h-full border-0" allow="fullscreen; autoplay; gamepad; focus-without-user-activation; accelerometer; gyroscope; clipboard-write; encrypted-media" allowfullscreen="true"></iframe>
+                <div id="crtOverlay" class="absolute inset-0 pointer-events-none hidden opacity-25 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.35)_50%)] bg-[length:100%_4px]"></div>
+            </div>
+
+            <div class="bg-slate-950 px-5 py-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+                <div class="flex items-center gap-4">
+                    <span class="text-emerald-400 text-[10px] font-pixel flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                        2025–2026 Engine Active
+                    </span>
+                    
+                    <div class="flex items-center gap-2 border-l border-slate-800 pl-4">
+                        <span class="text-[9px] font-pixel text-slate-400">MODE:</span>
+                        <button id="graphicsModeBtn" onclick="toggleGraphicsMode()" class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[9px] font-pixel flex items-center gap-1.5 hover:bg-emerald-500/30 transition-all shadow-sm">
+                            <i id="graphicsModeIcon" class="fa-solid fa-bolt text-amber-400"></i>
+                            <span id="graphicsModeText">LAG-FREE WASM GC (FAST)</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <select id="mirrorSelect" onchange="switchMirror(this.value)" class="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1 text-xs text-slate-300 focus:outline-none focus:border-cyranix-neon">
+                    </select>
+                    <button onclick="openDirectWindow()" class="hover:text-cyranix-neon flex items-center gap-1.5 transition-all text-cyranix-neon font-bold" title="Open in new tab if iframe is blocked">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Pop-out Game
+                    </button>
+                    <button onclick="reloadIframe()" class="hover:text-white flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-rotate-right text-xs"></i> Reload Stream
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD GAME MODAL -->
+    <div id="addModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-5 shadow-2xl relative">
+            <button onclick="closeAddGameModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div>
+                <h3 class="text-xl font-bold font-cyber text-white">Add Game to CYRANIX (2025–2026)</h3>
+                <p class="text-xs text-slate-400 mt-1">Embed an updated HTML5 / Web Assembly game via iframe URL</p>
+            </div>
+
+            <form onsubmit="handleAddGame(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Game Title *</label>
+                    <input type="text" id="newTitle" required placeholder="e.g. FNAF 3 Web / Cyber Shooter 2026" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:border-cyranix-neon focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Genre *</label>
+                        <select id="newGenre" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-100 focus:border-cyranix-neon focus:outline-none">
+                            <option value="Horror">Horror</option>
+                            <option value="Arcade">Arcade</option>
+                            <option value="3D Runner">3D Runner</option>
+                            <option value="Action">Action</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Rating</label>
+                        <input type="text" id="newRating" value="5.0/5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:border-cyranix-neon focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Iframe Embed URL *</label>
+                    <input type="url" id="newEmbedUrl" required placeholder="https://..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:border-cyranix-neon focus:outline-none font-mono text-xs">
+                </div>
+
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" onclick="closeAddGameModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white">Cancel</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-cyranix-neon text-slate-950 font-bold font-cyber text-xs uppercase tracking-wider hover:bg-cyan-300">Publish Game</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SETTINGS & CHROMBOOK CLOAKER MODAL -->
+    <div id="settingsModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-5 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeSettingsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-cyranix-neon text-xl">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="text-xl font-bold font-cyber text-white">System Settings</h3>
+                        <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-bold uppercase">
+                            2025–2026 Engine Ready
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-400">Optimize WASM performance & configure stealth tab cloaking</p>
+                </div>
+            </div>
+
+            <div class="flex gap-2 border-b border-slate-800 pb-2">
+                <button id="tabBtnCloak" onclick="switchSettingsTab('cloak')" class="settings-tab-btn active px-4 py-2 rounded-xl text-xs font-bold font-cyber uppercase transition-all bg-cyranix-neon text-slate-950 flex items-center gap-2">
+                    <i class="fa-solid fa-user-ninja"></i> Stealth Cloaker
+                </button>
+                <button id="tabBtnPerf" onclick="switchSettingsTab('perf')" class="settings-tab-btn px-4 py-2 rounded-xl text-xs font-bold font-cyber uppercase transition-all bg-slate-950 hover:bg-slate-800 text-slate-300 flex items-center gap-2">
+                    <i class="fa-solid fa-gauge-high"></i> WASM & Graphics 2026
+                </button>
+            </div>
+
+            <!-- TAB CLOAKER SECTION -->
+            <div id="settingsCloakPanel" class="space-y-4">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-pixel text-slate-400 uppercase tracking-wider block">Active Tab Cloak & Educational Mask</span>
+                        <div class="flex items-center gap-2.5 mt-2">
+                            <img id="currentCloakFavicon" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2307090e'/><path d='M18 4L8 18h7l-2 10 10-14h-7l2-10z' fill='%2300f3ff'/></svg>" class="w-4 h-4 rounded">
+                            <span id="currentCloakTitle" class="text-xs font-pixel text-white">CYRANIX Gaming Hub</span>
+                        </div>
+                    </div>
+                    <button onclick="applyCloak('reset')" class="text-[10px] text-rose-400 hover:text-rose-300 font-pixel">Reset Badge</button>
+                </div>
+
+                <p class="text-xs text-slate-400">Select a subtle educational disguise mask for school Chromebooks & restricted networks:</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <!-- Canvas LMS Cloak -->
+                    <div onclick="applyCloak('canvas')" class="cloak-card cursor-pointer bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-rose-500/50 rounded-xl p-4 transition-all flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" rx="20" fill="#E13928"/>
+                                <circle cx="50" cy="50" r="26" fill="none" stroke="white" stroke-width="10"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white font-sans">Canvas LMS</h4>
+                        <p class="text-[10px] font-mono text-slate-400 mt-1">canvas.instructure.com/courses</p>
+                        <span class="mt-3 px-2 py-1 rounded bg-rose-500/20 text-rose-300 text-[9px] font-pixel uppercase w-full">Mask as Canvas</span>
+                    </div>
+
+                    <!-- Clever Portal Cloak -->
+                    <div onclick="applyCloak('clever')" class="cloak-card cursor-pointer bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-blue-500/50 rounded-xl p-4 transition-all flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" rx="20" fill="#1877F2"/>
+                                <text x="50" y="68" font-size="55" font-weight="bold" fill="white" text-anchor="middle" font-family="sans-serif">C</text>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white font-sans">Clever Portal</h4>
+                        <p class="text-[10px] font-mono text-slate-400 mt-1">clever.com/in/student/portal</p>
+                        <span class="mt-3 px-2 py-1 rounded bg-blue-500/20 text-blue-300 text-[9px] font-pixel uppercase w-full">Mask as Clever</span>
+                    </div>
+
+                    <!-- Khan Academy Cloak -->
+                    <div onclick="applyCloak('khan')" class="cloak-card cursor-pointer bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-emerald-500/50 rounded-xl p-4 transition-all flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" rx="20" fill="#14BF96"/>
+                                <path d="M50 22 L78 40 L78 72 L50 88 L22 72 L22 40 Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white font-sans">Khan Academy</h4>
+                        <p class="text-[10px] font-mono text-slate-400 mt-1">khanacademy.org/math</p>
+                        <span class="mt-3 px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-pixel uppercase w-full">Mask as Khan</span>
+                    </div>
+
+                    <!-- Google Classroom Cloak -->
+                    <div onclick="applyCloak('classroom')" class="cloak-card cursor-pointer bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-yellow-500/50 rounded-xl p-4 transition-all flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-10 h-10" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" rx="22" fill="#0F9D58"/>
+                                <rect x="12" y="16" width="76" height="68" rx="8" fill="#137333" stroke="#FFD04C" stroke-width="6"/>
+                                <circle cx="50" cy="42" r="9" fill="#FFD04C"/>
+                                <path d="M 34 68 C 34 54 66 54 66 68 Z" fill="#FFD04C"/>
+                                <circle cx="34" cy="46" r="6" fill="white"/>
+                                <path d="M 22 68 C 22 58 46 58 46 68 Z" fill="white"/>
+                                <circle cx="66" cy="46" r="6" fill="white"/>
+                                <path d="M 54 68 C 54 58 78 58 78 68 Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white font-sans">Classroom</h4>
+                        <p class="text-[10px] font-mono text-slate-400 mt-1">classroom.google.com/u/0/c</p>
+                        <span class="mt-3 px-2 py-1 rounded bg-yellow-500/20 text-yellow-300 text-[9px] font-pixel uppercase w-full">Mask Classroom</span>
+                    </div>
+
+                    <!-- Google Drive Cloak -->
+                    <div onclick="applyCloak('drive')" class="cloak-card cursor-pointer bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-emerald-500/50 rounded-xl p-4 transition-all flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-9 h-9" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 33 15 L 67 15 L 95 63 L 61 63 Z" fill="#FFD04C"/>
+                                <path d="M 5 63 L 33 15 L 61 63 L 33 63 Z" fill="#4285F4"/>
+                                <path d="M 33 63 L 61 63 L 95 63 L 67 95 L 5 95 Z" fill="#0F9D58"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white font-sans">Google Drive</h4>
+                        <p class="text-[10px] font-mono text-slate-400 mt-1">drive.google.com/my-drive</p>
+                        <span class="mt-3 px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-pixel uppercase w-full">Mask Drive</span>
+                    </div>
+
+                    <!-- New Tab Cloak -->
+                    <div onclick="applyCloak('newtab')" class="cloak-card cursor-pointer bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-sky-500/50 rounded-xl p-4 transition-all flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.28-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white font-sans">New Tab</h4>
+                        <p class="text-[10px] font-mono text-slate-400 mt-1">google.com</p>
+                        <span class="mt-3 px-2 py-1 rounded bg-sky-500/20 text-sky-300 text-[9px] font-pixel uppercase w-full">Mask New Tab</span>
+                    </div>
+                </div>
+
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 flex items-start gap-3 text-xs text-amber-200">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-400 text-base mt-0.5"></i>
+                    <div>
+                        <span class="font-pixel text-[10px] block text-amber-300">PANIC HOTKEY (ESC KEY)</span>
+                        Press <code class="bg-black/50 px-1.5 py-0.5 rounded text-amber-300 font-mono">ESC</code> twice quickly to instantly apply the educational disguise and close any active game stream.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFORMANCE & GRAPHICS SECTION -->
+            <div id="settingsPerfPanel" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-300 mb-2">2025–2026 Engine & WASM Presets</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="setPerformancePreset('low')" id="presetLow" class="perf-preset-btn border border-cyranix-neon bg-cyranix-neon/10 p-3 rounded-xl text-left transition-all">
+                            <div class="font-bold text-xs text-cyranix-neon flex items-center gap-1.5">
+                                <i class="fa-solid fa-bolt text-amber-400"></i> WASM-GC Lag Free (Default)
+                            </div>
+                            <div class="text-[10px] text-slate-300 mt-1">50%+ frame rate boost using WASM GC execution layer.</div>
+                        </button>
+                        <button onclick="setPerformancePreset('balanced')" id="presetBalanced" class="perf-preset-btn border border-slate-800 bg-slate-950 p-3 rounded-xl text-left hover:border-cyranix-neon transition-all">
+                            <div class="font-bold text-xs text-white">Balanced 60 FPS</div>
+                            <div class="text-[10px] text-slate-400 mt-1">Standard smooth WebGL graphics and original audio.</div>
+                        </button>
+                        <button onclick="setPerformancePreset('ultra')" id="presetUltra" class="perf-preset-btn border border-slate-800 bg-slate-950 p-3 rounded-xl text-left hover:border-cyranix-neon transition-all">
+                            <div class="font-bold text-xs text-white flex items-center gap-1.5">
+                                <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> PBR Raytraced Shaders
+                            </div>
+                            <div class="text-[10px] text-slate-400 mt-1">Deferred physically-based rendering & dynamic lighting.</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CHROMEBOOK PERFORMANCE BOOST SHORTCUT TIPS -->
+                <div class="space-y-3 border-t border-slate-800 pt-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
+                        <h4 class="text-xs font-bold font-pixel text-amber-300 uppercase">2026 Chromebook Performance Hacks</h4>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+                            <span class="font-bold text-slate-200 block text-[11px]">Instant Cache & RAM Flush</span>
+                            <p class="text-[10px] text-slate-400 mt-0.5">Press <code class="bg-slate-900 text-amber-400 px-1 py-0.5 rounded font-mono">Ctrl + Shift + Q + Q</code> twice to instantly purge active browser memory.</p>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+                            <span class="font-bold text-slate-200 block text-[11px]">Hardware Throttle Reset</span>
+                            <p class="text-[10px] text-slate-400 mt-0.5">Press <code class="bg-slate-900 text-amber-400 px-1 py-0.5 rounded font-mono">Search + L</code> to trigger immediate zero-latency screen refresh.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 border-t border-slate-800 pt-3">
+                    <div class="flex items-center justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div>
+                            <span class="text-xs font-bold text-white block">Retro CRT Arcade Scanlines Shader</span>
+                            <span class="text-[11px] text-slate-400">Adds realistic CRT scanline overlay to the active game stream</span>
+                        </div>
+                        <input type="checkbox" id="crtShaderToggle" onchange="toggleCRTShader(this.checked)" class="w-4 h-4 accent-cyan-400 cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+                <button onclick="closeSettingsModal()" class="px-5 py-2.5 rounded-xl bg-cyranix-neon text-slate-950 font-bold font-cyber text-xs uppercase tracking-wider hover:bg-cyan-300">Save & Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 px-4 text-center text-xs text-slate-500">
+        <p class="font-cyber uppercase tracking-wider text-slate-400">CYRANIX GAMING PLATFORM &copy; 2025–2026 | UPDATED v3.5 RELEASE</p>
+    </footer>
+
+    <script>
+        const gamesList = [
+            {
+                id: 'eaglercraft',
+                title: 'EaglercraftX',
+                genre: 'Arcade',
+                console: 'WebAssembly / 2026',
+                rating: '5.0/5',
+                embedUrl: 'https://eaglercraft.q13x.com/1.8.8_2/wasm/',
+                mirrors: [
+                    { name: 'Source 1: EaglercraftX 1.8.8 WASM Engine', url: 'https://eaglercraft.q13x.com/1.8.8_2/wasm/' },
+                    { name: 'Source 2: Eaglercraft 1.8.8 High Performance JS', url: 'https://eaglercraft.q13x.com/1.8.8_2/js/' },
+                    { name: 'Source 3: Eaglercraft 1.8.8 GitHub Web Mirror', url: 'https://eaglercraft1-8.github.io/' },
+                    { name: 'Source 4: Eaglercraft Official Web Port', url: 'https://eaglercraft.com/mc/1.8.8/' }
+                ],
+                description: 'The updated WASM WebAssembly edition of Minecraft Java 1.8.8. Features singleplayer EPK world saving, cross-play multiplayer servers, and smooth frame rates.'
+            },
+            {
+                id: 'fnaf1',
+                title: 'Five Nights at Freddy\'s 1',
+                genre: 'Horror',
+                console: 'Web / 2026 Port',
+                rating: '4.9/5',
+                embedUrl: 'https://dorukyum.github.io/FNAF-Web/',
+                mirrors: [
+                    { name: 'Source 1: Authentic FNAF 1 Web Engine', url: 'https://dorukyum.github.io/FNAF-Web/' },
+                    { name: 'Source 2: React FNAF 1 HD Port', url: 'https://wellsousaaa.github.io/Five-Nights-at-Freddys-Web/' },
+                    { name: 'Source 3: Clickteam HD Engine Mirror', url: 'https://irv77.github.io/hd_fnaf/1/' }
+                ],
+                description: 'The 1:1 Five Nights at Freddy\'s 1 web build updated for 2025-2026. Monitor cameras, manage power, control door security, and survive all 5 Nights with full desktop & touchscreen controls.'
+            },
+            {
+                id: 'fnaf2',
+                title: 'Five Nights at Freddy\'s 2',
+                genre: 'Horror',
+                console: 'Web / 2026 Port',
+                rating: '4.9/5',
+                embedUrl: 'https://irv77.github.io/hd_fnaf/2/',
+                mirrors: [
+                    { name: 'Source 1: HD Clickteam FNAF 2 Web', url: 'https://irv77.github.io/hd_fnaf/2/' },
+                    { name: 'Source 2: FNAF 2 WebGL Mirror', url: 'https://sussygamedeveloper.github.io/FNAF2/' }
+                ],
+                description: 'Survive the revised animatronics with the Freddy mask and flashlight in this 1:1 WebAssembly HTML5 port of FNAF 2.'
+            },
+            {
+                id: 'subwaysurfers',
+                title: 'Subway Surfers',
+                genre: '3D Runner',
+                console: 'HTML5 WebGL',
+                rating: '4.8/5',
+                embedUrl: 'https://testingherokuapp.github.io/subwaysurfer/',
+                mirrors: [
+                    { name: 'Source 1: HTML5 WebGL Runner', url: 'https://testingherokuapp.github.io/subwaysurfer/' },
+                    { name: 'Source 2: Subway Surfers Web Port', url: 'https://editplay.github.io/subway-surfers/' }
+                ],
+                description: 'Updated 2026 web build! Dash as fast as you can through subway tracks, dodge trains, and use hoverboards in high 60 FPS.'
+            },
+            {
+                id: 'slope',
+                title: 'Universal games',
+                genre: '3D Runner',
+                console: 'WebGL 3D',
+                rating: '4.8/5',
+                embedUrl: 'https://kbhgames.com/game/slope',
+                mirrors: [
+                    { name: 'Source 1: 3D High FPS Stream', url: 'https://kbhgames.com/game/slope' }
+                ],
+                description: 'Navigate a neon ball down endless futuristic slopes at breakneck speeds while avoiding obstacles and ramps.'
+            }
+        ];
+
+        let activeCategory = 'All';
+        let currentGameId = null;
+        let isRealisticMode = false;
+
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            if (!grid) return;
+
+            const searchQuery = (document.getElementById('searchInput')?.value || '').toLowerCase();
+
+            const filtered = gamesList.filter(game => {
+                const matchesCat = (activeCategory === 'All') || (game.genre.toLowerCase() === activeCategory.toLowerCase());
+                const matchesQuery = game.title.toLowerCase().includes(searchQuery) || game.genre.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-slate-500 font-pixel text-xs">
+                        NO GAMES FOUND IN CYRANIX 2025-2026 CATALOG
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(game => `
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden shadow-xl card-hover flex flex-col justify-between group relative">
+                    <div class="p-6 bg-gradient-to-b from-slate-950 to-slate-900 border-b border-slate-800/80 flex flex-col items-center justify-center min-h-[160px] text-center relative">
+                        <div class="text-cyranix-neon font-pixel text-xs sm:text-sm leading-tight uppercase neon-text-cyan px-2 group-hover:scale-105 transition-transform">
+                            ${game.title}
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                            <span class="px-2 py-0.5 rounded bg-cyranix-accent/20 text-cyranix-accent border border-cyranix-accent/30 font-pixel text-[8px] uppercase">
+                                ${game.genre}
+                            </span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-pixel text-[8px] uppercase">
+                                ${game.console || 'Web'}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 space-y-3 flex-1 flex flex-col justify-between">
+                        <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed font-sans">
+                            ${game.description}
+                        </p>
+
+                        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+                            <span class="text-[10px] font-pixel text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                VERIFIED 2026
+                            </span>
+                            
+                            <button onclick="openGameModal('${game.id}')" class="px-4 py-2 rounded-xl bg-cyranix-neon hover:bg-cyan-300 text-slate-950 font-pixel text-[9px] uppercase tracking-wider transition-all flex items-center gap-1.5 font-bold shadow-lg shadow-cyranix-neon/20">
+                                <i class="fa-solid fa-play text-[10px]"></i> PLAY
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openGameModal(id) {
+            const game = gamesList.find(g => g.id === id);
+            if (!game) return;
+
+            currentGameId = id;
+            document.getElementById('modalTitle').innerText = game.title;
+            document.getElementById('modalCategory').innerText = game.genre;
+
+            const mirrorSelect = document.getElementById('mirrorSelect');
+            if (mirrorSelect) {
+                mirrorSelect.innerHTML = game.mirrors.map((m, idx) => 
+                    `<option value="${m.url}">Source ${idx + 1}: ${m.name}</option>`
+                ).join('');
+            }
+
+            const iframe = document.getElementById('gameIframe');
+            if (iframe) iframe.src = game.embedUrl;
+
+            document.getElementById('gameModal').classList.remove('hidden');
+            updateGraphicsUI();
+        }
+
+        function closeGameModal() {
+            const iframe = document.getElementById('gameIframe');
+            if (iframe) iframe.src = '';
+            document.getElementById('gameModal').classList.add('hidden');
+        }
+
+        function switchMirror(url) {
+            const iframe = document.getElementById('gameIframe');
+            if (iframe) iframe.src = url;
+        }
+
+        function reloadIframe() {
+            const iframe = document.getElementById('gameIframe');
+            if (iframe) {
+                const src = iframe.src;
+                iframe.src = '';
+                setTimeout(() => { iframe.src = src; }, 100);
+            }
+        }
+
+        function openDirectWindow() {
+            if (!currentGameId) return;
+            const game = gamesList.find(g => g.id === currentGameId);
+            const iframe = document.getElementById('gameIframe');
+            const url = iframe ? iframe.src : (game ? game.embedUrl : '');
+            if (url) window.open(url, '_blank');
+        }
+
+        function toggleFullscreen() {
+            const container = document.getElementById('modalInner');
+            if (!container) return;
+
+            if (!document.fullscreenElement) {
+                if (container.requestFullscreen) container.requestFullscreen();
+                else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+
+        function toggleGraphicsMode() {
+            isRealisticMode = !isRealisticMode;
+            updateGraphicsUI();
+        }
+
+        function updateGraphicsUI() {
+            const btn = document.getElementById('graphicsModeBtn');
+            const text = document.getElementById('graphicsModeText');
+            const icon = document.getElementById('graphicsModeIcon');
+            const iframeContainer = document.getElementById('iframeContainer');
+
+            if (isRealisticMode) {
+                if (btn) btn.className = "px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[9px] font-pixel flex items-center gap-1.5 hover:bg-purple-500/30 transition-all shadow-sm";
+                if (text) text.innerText = "REALISTIC SHADERS 2026";
+                if (icon) icon.className = "fa-solid fa-wand-magic-sparkles text-purple-400";
+                if (iframeContainer) {
+                    iframeContainer.style.filter = "contrast(1.08) saturate(1.15) brightness(1.02)";
+                }
+            } else {
+                if (btn) btn.className = "px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[9px] font-pixel flex items-center gap-1.5 hover:bg-emerald-500/30 transition-all shadow-sm";
+                if (text) text.innerText = "LAG-FREE WASM GC (FAST)";
+                if (icon) icon.className = "fa-solid fa-bolt text-amber-400";
+                if (iframeContainer) {
+                    iframeContainer.style.filter = "none";
+                }
+            }
+        }
+
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.innerText.trim().toLowerCase() === cat.toLowerCase()) {
+                    btn.className = "filter-btn active px-3.5 py-2 rounded-lg text-[10px] font-pixel uppercase transition-all bg-cyranix-neon text-slate-950";
+                } else {
+                    btn.className = "filter-btn px-3.5 py-2 rounded-lg text-[10px] font-pixel uppercase transition-all bg-slate-900 hover:bg-slate-800 text-slate-300";
+                }
+            });
+            renderGames();
+        }
+
+        function filterGames() {
+            renderGames();
+        }
+
+        function resetFilters() {
+            const input = document.getElementById('searchInput');
+            if (input) input.value = '';
+            filterCategory('All');
+        }
+
+        function openAddGameModal() {
+            document.getElementById('addModal').classList.remove('hidden');
+        }
+
+        function closeAddGameModal() {
+            document.getElementById('addModal').classList.add('hidden');
+        }
+
+        function handleAddGame(e) {
+            e.preventDefault();
+            const title = document.getElementById('newTitle').value;
+            const genre = document.getElementById('newGenre').value;
+            const rating = document.getElementById('newRating').value || '5.0/5';
+            const embedUrl = document.getElementById('newEmbedUrl').value;
+
+            const newGame = {
+                id: 'game_' + Date.now(),
+                title,
+                genre,
+                console: '2026 Web Port',
+                rating,
+                embedUrl,
+                mirrors: [{ name: 'Primary Web Source', url: embedUrl }],
+                description: 'User published game on CYRANIX 2025-2026 hub.'
+            };
+
+            gamesList.push(newGame);
+            closeAddGameModal();
+            renderGames();
+        }
+
+        let cogRotationDegree = 0;
+
+        function openSettingsModal() {
+            cogRotationDegree += 360;
+            const cog = document.getElementById('settingsCog');
+            if (cog) cog.style.transform = `rotate(${cogRotationDegree}deg)`;
+
+            document.getElementById('settingsModal').classList.remove('hidden');
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').classList.add('hidden');
+        }
+
+        function switchSettingsTab(tab) {
+            const btnCloak = document.getElementById('tabBtnCloak');
+            const btnPerf = document.getElementById('tabBtnPerf');
+            const panelCloak = document.getElementById('settingsCloakPanel');
+            const panelPerf = document.getElementById('settingsPerfPanel');
+
+            if (tab === 'cloak') {
+                btnCloak.className = "settings-tab-btn active px-4 py-2 rounded-xl text-xs font-bold font-cyber uppercase transition-all bg-cyranix-neon text-slate-950 flex items-center gap-2";
+                btnPerf.className = "settings-tab-btn px-4 py-2 rounded-xl text-xs font-bold font-cyber uppercase transition-all bg-slate-950 hover:bg-slate-800 text-slate-300 flex items-center gap-2";
+                panelCloak.classList.remove('hidden');
+                panelPerf.classList.add('hidden');
+            } else {
+                btnPerf.className = "settings-tab-btn active px-4 py-2 rounded-xl text-xs font-bold font-cyber uppercase transition-all bg-cyranix-neon text-slate-950 flex items-center gap-2";
+                btnCloak.className = "settings-tab-btn px-4 py-2 rounded-xl text-xs font-bold font-cyber uppercase transition-all bg-slate-950 hover:bg-slate-800 text-slate-300 flex items-center gap-2";
+                panelPerf.classList.remove('hidden');
+                panelCloak.classList.add('hidden');
+            }
+        }
+
+        const cloakPresets = {
+            canvas: {
+                title: 'Dashboard | Canvas LMS',
+                path: '#/courses/389102/modules/academic-resources',
+                favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23E13928'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='10'/%3E%3C/svg%3E"
+            },
+            clever: {
+                title: 'Clever | Student Portal',
+                path: '#/in/school/student/portal-dashboard',
+                favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231877F2'/%3E%3Ctext x='50' y='68' font-size='55' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'%3EC%3C/text%3E%3C/svg%3E"
+            },
+            khan: {
+                title: 'Dashboard | Khan Academy',
+                path: '#/mission/math/algebra/lessons-practice',
+                favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2314BF96'/%3E%3Cpath d='M50 22 L78 40 L78 72 L50 88 L22 72 L22 40 Z' fill='white'/%3E%3C/svg%3E"
+            },
+            classroom: {
+                title: 'Classes | Google Classroom',
+                path: '#/u/0/c/MjU0Mzg2/learning-modules',
+                favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230F9D58'/%3E%3Crect x='12' y='16' width='76' height='68' rx='8' fill='%23137333' stroke='%23FFD04C' stroke-width='6'/%3E%3Ccircle cx='50' cy='42' r='9' fill='%23FFD04C'/%3E%3Cpath d='M 34 68 C 34 54 66 54 66 68 Z' fill='%23FFD04C'/%3E%3Ccircle cx='34' cy='46' r='6' fill='white'/%3E%3Cpath d='M 22 68 C 22 58 46 58 46 68 Z' fill='white'/%3E%3Ccircle cx='66' cy='46' r='6' fill='white'/%3E%3Cpath d='M 54 68 C 54 58 78 58 78 68 Z' fill='white'/%3E%3C/svg%3E"
+            },
+            drive: {
+                title: 'My Drive - Google Drive',
+                path: '#/drive/my-drive/academic-documents-2026',
+                favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M 33 15 L 67 15 L 95 63 L 61 63 Z' fill='%23FFD04C'/%3E%3Cpath d='M 5 63 L 33 15 L 61 63 L 33 63 Z' fill='%234285F4'/%3E%3Cpath d='M 33 63 L 61 63 L 95 63 L 67 95 L 5 95 Z' fill='%230F9D58'/%3E%3C/svg%3E"
+            },
+            newtab: {
+                title: 'New Tab',
+                path: '#/newtab',
+                favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.28-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3C/svg%3E"
+            },
+            reset: {
+                title: 'CYRANIX Gaming Hub',
+                path: '#',
+                favicon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2307090e'/><path d='M18 4L8 18h7l-2 10 10-14h-7l2-10z' fill='%2300f3ff'/></svg>"
+            }
+        };
+
+        function applyCloak(type) {
+            const data = cloakPresets[type] || cloakPresets.reset;
+            document.title = data.title;
+            
+            if (data.path) {
+                try {
+                    history.replaceState(null, '', data.path);
+                } catch(e) { /* ignore fallback */ }
+            }
+
+            let faviconLink = document.querySelector("link[rel*='icon']");
+            if (!faviconLink) {
+                faviconLink = document.createElement('link');
+                faviconLink.rel = 'shortcut icon';
+                document.head.appendChild(faviconLink);
+            }
+            faviconLink.href = data.favicon;
+
+            const titleEl = document.getElementById('currentCloakTitle');
+            const favEl = document.getElementById('currentCloakFavicon');
+            if (titleEl) titleEl.innerText = data.title;
+            if (favEl) favEl.src = data.favicon;
+        }
+
+        let lastEscPressTime = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const now = Date.now();
+                if (now - lastEscPressTime < 500) {
+                    applyCloak('newtab');
+                    if (!document.getElementById('gameModal').classList.contains('hidden')) {
+                        closeGameModal();
+                    }
+                }
+                lastEscPressTime = now;
+            }
+        });
+
+        function setPerformancePreset(preset) {
+            const btnLow = document.getElementById('presetLow');
+            const btnBalanced = document.getElementById('presetBalanced');
+            const btnUltra = document.getElementById('presetUltra');
+
+            [btnLow, btnBalanced, btnUltra].forEach(btn => {
+                if (btn) btn.className = "perf-preset-btn border border-slate-800 bg-slate-950 p-3 rounded-xl text-left hover:border-cyranix-neon transition-all";
+            });
+
+            if (preset === 'low') {
+                if (btnLow) btnLow.className = "perf-preset-btn border border-cyranix-neon bg-cyranix-neon/10 p-3 rounded-xl text-left transition-all";
+                isRealisticMode = false;
+                updateGraphicsUI();
+            } else if (preset === 'ultra') {
+                if (btnUltra) btnUltra.className = "perf-preset-btn border border-cyranix-neon bg-cyranix-neon/10 p-3 rounded-xl text-left transition-all";
+                isRealisticMode = true;
+                updateGraphicsUI();
+            } else {
+                if (btnBalanced) btnBalanced.className = "perf-preset-btn border border-cyranix-neon bg-cyranix-neon/10 p-3 rounded-xl text-left transition-all";
+                isRealisticMode = false;
+                updateGraphicsUI();
+            }
+        }
+
+        function toggleCRTShader(enabled) {
+            const crtOverlay = document.getElementById('crtOverlay');
+            if (crtOverlay) {
+                if (enabled) crtOverlay.classList.remove('hidden');
+                else crtOverlay.classList.add('hidden');
+            }
+        }
+
+        let mouseX = -100, mouseY = -100;
+        let trailX = -100, trailY = -100;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            const cursor = document.getElementById('cyranixCursor');
+            const trail = document.getElementById('cyranixCursorTrail');
+
+            // Hide cursor when hovering over active game stream iframe
+            const iframeContainer = document.getElementById('iframeContainer');
+            const gameModal = document.getElementById('gameModal');
+            if (iframeContainer && gameModal && !gameModal.classList.contains('hidden')) {
+                const rect = iframeContainer.getBoundingClientRect();
+                if (mouseX >= rect.left && mouseX <= rect.right && mouseY >= rect.top && mouseY <= rect.bottom) {
+                    if (cursor) cursor.classList.add('opacity-0');
+                    if (trail) trail.classList.add('opacity-0');
+                    return;
+                }
+            }
+
+            if (cursor) {
+                cursor.style.transform = `translate3d(${mouseX - 16}px, ${mouseY - 16}px, 0)`;
+                cursor.classList.remove('opacity-0');
+            }
+            if (trail) trail.classList.remove('opacity-0');
+        });
+
+        document.addEventListener('mouseleave', () => {
+            const cursor = document.getElementById('cyranixCursor');
+            const trail = document.getElementById('cyranixCursorTrail');
+            if (cursor) cursor.classList.add('opacity-0');
+            if (trail) trail.classList.add('opacity-0');
+        });
+
+        function animateCursorTrail() {
+            trailX += (mouseX - trailX) * 0.22;
+            trailY += (mouseY - trailY) * 0.22;
+
+            const trail = document.getElementById('cyranixCursorTrail');
+            if (trail) {
+                const width = trail.offsetWidth || 32;
+                trail.style.transform = `translate3d(${trailX - width / 2}px, ${trailY - width / 2}px, 0)`;
+            }
+            requestAnimationFrame(animateCursorTrail);
+        }
+        requestAnimationFrame(animateCursorTrail);
+
+        // Hover target detection for cursor
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a, button, input, select, label, [role="button"], .cloak-card, .card-hover')) {
+                document.body.classList.add('cursor-hover-active');
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('a, button, input, select, label, [role="button"], .cloak-card, .card-hover')) {
+                document.body.classList.remove('cursor-hover-active');
+            }
+        });
+
+        // Click particles effect
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < 6; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'click-particle';
+                const color = i % 2 === 0 ? '#00f3ff' : '#ff0055';
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 6px ${color}`;
+                particle.style.left = `${e.clientX}px`;
+                particle.style.top = `${e.clientY}px`;
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 20 + Math.random() * 30;
+                particle.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
+                particle.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
+
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 400);
+            }
+        });
+
+        function initApp() {
+            renderGames();
+
+            const bar = document.getElementById('loadingBar');
+            if (bar) bar.style.width = '100%';
+
+            setTimeout(() => {
+                const screen = document.getElementById('loadingScreen');
+                if (screen) {
+                    screen.classList.add('opacity-0');
+                    setTimeout(() => screen.classList.add('hidden'), 500);
+                }
+            }, 400);
+        }
+
+        window.addEventListener('load', initApp);
+        setTimeout(() => {
+            const screen = document.getElementById('loadingScreen');
+            if (screen && !screen.classList.contains('hidden')) {
+                initApp();
+            }
+        }, 1200);
+    </script>
+</body>
+</html>
